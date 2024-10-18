@@ -1,0 +1,95 @@
+.main {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 28px;
+}
+
+.cabinet {
+  background: center / cover no-repeat url("../images/cabinet.png");
+  inline-size: 211.37px;
+  block-size: 431.35px;
+  position: relative;
+}
+
+.cabinet__container {
+  inline-size: 100%;
+  block-size: 100%;
+  position: relative;
+}
+
+.cabinet__item {
+  position: absolute;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out;
+}
+
+.cabinet__item_hidden {
+  display: none;
+}
+
+/* .cabinet__item:hover {
+  scale: 1.2;
+} */
+
+.cabinet__wine {
+  inset-inline-start: 22px;
+  inset-block-start: -2px;
+}
+
+.cabinet__milk {
+  inset-inline-start: 63px;
+  inset-block-start: 31px;
+}
+
+.cabinet__jam {
+  inset-inline-start: 103px;
+  inset-block-start: 79px;
+}
+
+.cabinet__cheese {
+  inset-inline-start: 158px;
+  inset-block-start: 89px;
+}
+
+.cabinet__meat {
+  inset-inline-start: 7px;
+  inset-block-start: 167px;
+}
+
+.cabinet__leg {
+  inset-inline-start: 58px;
+  inset-block-start: 169px;
+}
+
+.cabinet__pocket {
+  inset-inline-start: 129px;
+  inset-block-start: 176px;
+}
+
+.cabinet__pineapple {
+  inset-inline-start: 14px;
+  inset-block-start: 237px;
+}
+
+.cabinet__banana {
+  inset-inline-start: 58px;
+  inset-block-start: 265px;
+}
+
+.cabinet__apple {
+  inset-inline-start: 115px;
+  inset-block-start: 276px;
+}
+
+.cabinet__leaf {
+  inset-inline-start: 155px;
+  inset-block-start: 268px;
+}
+
+
+.basket {
+  position: absolute;
+  inset-inline-start: -32px;
+  inset-block-start: calc(100% - 88px);
+  object-fit: cover;
+}
