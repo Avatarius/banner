@@ -3,12 +3,10 @@ const cabinetContainer = document.querySelector(".cabinet__container");
 const productList = document.querySelectorAll(".cabinet__item");
 
 function moveAt(target, x, y) {
-  // const resultX = (cabinetContainer.getBoundingClientRect().left + x) - target.offsetWidth / 2;
-  console.log(target.getBoundingClientRect().top);
-  const resultY = ( (y) - (target.offsetHeight / 2) - 28);
-
-  // target.style.insetInlineEnd= `${resultX}px` ;
-  target.style.insetBlockStart= `${resultY}px` ;
+  const resultX = ( (x) - (target.offsetWidth / 2));
+  const resultY = ( (y) - (target.offsetHeight / 2));
+  target.style.insetInlineStart = `${ resultX - cabinetContainer.getBoundingClientRect().left}px`;
+  target.style.insetBlockStart= `${resultY - cabinetContainer.getBoundingClientRect().top}px` ;
 }
 
 function handleDnd(e) {
@@ -16,8 +14,8 @@ function handleDnd(e) {
   cabinetContainer.append(currentTarget);
   moveAt(currentTarget, pageX, pageY);
   function handleMouseMove(e) {
-    // const { pageX, pageY } = e;
-    // moveAt(currentTarget, e.pageX, e.pageY);
+    const { pageX, pageY } = e;
+    moveAt(currentTarget, pageX, pageY);
   }
 
   document.addEventListener("mousemove", handleMouseMove);
@@ -31,4 +29,5 @@ function handleDnd(e) {
 
 productList.forEach((item) => {
   item.addEventListener("mousedown", handleDnd);
+  item.ondragstart = () => false;
 });
