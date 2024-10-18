@@ -2,26 +2,29 @@ const cabinetContainer = document.querySelector(".cabinet__container");
 
 const productList = document.querySelectorAll(".cabinet__item");
 
-function moveAt(target, x, y) {
-  const resultX = ( (x) - (target.offsetWidth / 2));
-  const resultY = ( (y) - (target.offsetHeight / 2));
-  target.style.insetInlineStart = `${ resultX - cabinetContainer.getBoundingClientRect().left}px`;
-  target.style.insetBlockStart= `${resultY - cabinetContainer.getBoundingClientRect().top}px` ;
-}
+
 
 function handleDnd(e) {
-  const { currentTarget, pageX, pageY } = e;
+  const { currentTarget, pageX, pageY, clientX, clientY } = e;
+  const offsetX = currentTarget.getBoundingClientRect().left;
+  const offsetY = currentTarget.getBoundingClientRect().top;
+  const shiftX = clientX - offsetX;
+  const shiftY = clientY - offsetY;
   cabinetContainer.append(currentTarget);
-  moveAt(currentTarget, pageX, pageY);
+  function moveAt(x, y) {
+    const resultX = x - cabinetContainer.getBoundingClientRect().left;
+    const resultY = y - cabinetContainer.getBoundingClientRect().top;
+    currentTarget.style.insetInlineStart = `${resultX - shiftX}px`
+    currentTarget.style.insetBlockStart = `${resultY - shiftY}px`
+  }
+  moveAt(pageX, pageY);window
   function handleMouseMove(e) {
     const { pageX, pageY } = e;
-    moveAt(currentTarget, pageX, pageY);
+    moveAt(pageX, pageY);
   }
 
   document.addEventListener("mousemove", handleMouseMove);
   currentTarget.onmouseup = () => {
-    console.log("remove");
-
     document.removeEventListener("mousemove", handleMouseMove);
     currentTarget.onmouseup = null;
   };
