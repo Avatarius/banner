@@ -27,10 +27,6 @@
   display: none;
 }
 
-/* .cabinet__item:hover {
-  scale: 1.2;
-} */
-
 .cabinet__wine {
   inset-inline-start: 22px;
   inset-block-start: -2px;
@@ -86,10 +82,33 @@
   inset-block-start: 268px;
 }
 
-
 .basket {
   position: absolute;
   inset-inline-start: -32px;
   inset-block-start: calc(100% - 88px);
   object-fit: cover;
+}
+
+.basket__button {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  border-radius: 16px;
+  inline-size: 174px;
+  block-size: 56px;
+  background-color: #fce000;
+  padding: 19px 18px 20px 18px;
+  cursor: pointer;
+  position: absolute;
+  inset-inline-start: 51px;
+  inset-block-end: 23px;
+  text-align: center;
+  transition: opacity 0.2s linear;
+
+}
+
+.basket__button_hidden {
+  opacity: 0;
 }
