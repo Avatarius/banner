@@ -17,67 +17,67 @@
   position: relative;
 }
 
-.cabinet__item {
+.product {
   position: absolute;
   cursor: pointer;
   transition: scale 0.2s ease-in-out;
 }
 
-.cabinet__item_hidden {
+.product_hidden {
   display: none;
 }
 
-.cabinet__wine {
+.product__wine {
   inset-inline-start: 22px;
   inset-block-start: -2px;
 }
 
-.cabinet__milk {
+.product__milk {
   inset-inline-start: 63px;
   inset-block-start: 31px;
 }
 
-.cabinet__jam {
+.product__jam {
   inset-inline-start: 103px;
   inset-block-start: 79px;
 }
 
-.cabinet__cheese {
+.product__cheese {
   inset-inline-start: 158px;
   inset-block-start: 89px;
 }
 
-.cabinet__meat {
+.product__meat {
   inset-inline-start: 7px;
   inset-block-start: 167px;
 }
 
-.cabinet__leg {
+.product__leg {
   inset-inline-start: 58px;
   inset-block-start: 169px;
 }
 
-.cabinet__pocket {
+.product__pocket {
   inset-inline-start: 129px;
   inset-block-start: 176px;
 }
 
-.cabinet__pineapple {
+.product__pineapple {
   inset-inline-start: 14px;
   inset-block-start: 237px;
 }
 
-.cabinet__banana {
+.product__banana {
   inset-inline-start: 58px;
   inset-block-start: 265px;
 }
 
-.cabinet__apple {
+.product__apple {
   inset-inline-start: 115px;
   inset-block-start: 276px;
 }
 
-.cabinet__leaf {
+.product__leaf {
   inset-inline-start: 155px;
   inset-block-start: 268px;
 }
@@ -87,6 +87,16 @@
   inset-inline-start: -32px;
   inset-block-start: calc(100% - 88px);
   object-fit: cover;
+}
+
+.basket__container {
+  /* background-color: rgba(255 0 0 / 0.5); */
+  inline-size: 190px;
+  block-size: 150px;
+  /* border: 1px solid red; */
+  position: absolute;
+  inset-inline-end: 24px;
+  inset-block-end: 50px;
 }
 
 .basket__button {

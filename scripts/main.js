@@ -1,13 +1,18 @@
 const cabinetContainer = document.querySelector(".cabinet__container");
 const basket = document.querySelector(".basket");
-const basketButton = document.querySelector('.basket__button');
+const basketContainer = document.querySelector(".basket__container");
+const basketButton = document.querySelector(".basket__button");
 let basketSize = 0;
-const productList = document.querySelectorAll(".cabinet__item");
-
+const productList = document.querySelectorAll(".product");
 let currentDroppable = null;
+
+
+let inlineOffset = 0;
+let previousWidth = 0;
 
 function handleDnd(e) {
   const { currentTarget, pageX, pageY, clientX, clientY } = e;
+  let targetCopy;
   const offsetX = currentTarget.getBoundingClientRect().left;
   const offsetY = currentTarget.getBoundingClientRect().top;
   const shiftX = clientX - offsetX;
@@ -21,8 +26,35 @@ function handleDnd(e) {
     currentTarget.style.insetBlockStart = `${resultY - shiftY}px`;
   }
 
-  function reset() {
-    currentTarget.style = "";
+  function reset(node) {
+    node.style = "";
+  }
+
+
+  function moveCopy() {
+
+    const width = targetCopy.getBoundingClientRect().width;
+    const height = targetCopy.getBoundingClientRect().height;
+
+    const itemCount = basketContainer.querySelectorAll(".product").length;
+
+    if (itemCount > 1) {
+      inlineOffset += previousWidth;
+    }
+
+    if (inlineOffset >= (basketContainer.getBoundingClientRect().width - 50)) {
+      inlineOffset = 0;
+    }
+
+
+    reset(targetCopy);
+
+    targetCopy.style.insetInlineStart = `${inlineOffset}px`;
+    targetCopy.style.insetBlockEnd = 0;
+    previousWidth = width;
+    /* targetCopy.style.insetInlineStart = `${0}px`;
+    targetCopy.style.insetBlockStart = 'unset';
+    targetCopy.style.insetBlockEnd = 0; */
   }
 
   moveAt(pageX, pageY);
@@ -45,21 +77,24 @@ function handleDnd(e) {
   currentTarget.onmouseup = () => {
     document.removeEventListener("mousemove", handleMouseMove);
     currentTarget.onmouseup = null;
-    console.log(currentDroppable);
     if (!currentDroppable) {
-      reset();
-      currentTarget.setAttribute('data-in-basket', false);
+      reset(currentTarget);
+      // currentTarget.setAttribute('data-in-basket', false);
     } else {
-      currentTarget.setAttribute('data-in-basket', true);
-    }
-    const basket = document.querySelectorAll('.cabinet__item[data-in-basket=true]');;
+      // currentTarget.setAttribute('data-in-basket', true);
+      targetCopy = currentTarget.cloneNode(true);
+      currentTarget.classList.add("product_hidden");
+      targetCopy.classList.remove(`product__${targetCopy.dataset.name}`);
+      basketContainer.append(targetCopy);
 
-    if (basket.length >= 3) {
+      moveCopy();
+    }
+
+    /* if (basket.length >= 3) {
       basketButton.classList.remove('basket__button_hidden');
     } else {
       basketButton.classList.add('basket__button_hidden');
-    }
-
+    } */
   };
 }
 
