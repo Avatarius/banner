@@ -42,16 +42,19 @@ function handleDnd(e) {
       inlineOffset += previousWidth;
     }
 
-    if (inlineOffset >= (basketContainer.getBoundingClientRect().width - 50)) {
+    if (inlineOffset >= (basketContainer.getBoundingClientRect().width - width)) {
       inlineOffset = 0;
     }
+    console.log(basketContainer.getBoundingClientRect().width);
 
 
     reset(targetCopy);
 
     targetCopy.style.insetInlineStart = `${inlineOffset}px`;
     targetCopy.style.insetBlockEnd = 0;
+    targetCopy.style.zIndex = -1;
     previousWidth = width;
+
     /* targetCopy.style.insetInlineStart = `${0}px`;
     targetCopy.style.insetBlockStart = 'unset';
     targetCopy.style.insetBlockEnd = 0; */
