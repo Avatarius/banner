@@ -123,9 +123,11 @@
   inset-block-end: 23px;
   text-align: center;
   transition: opacity 0.2s linear;
+  pointer-events: all;
 
 }
 
 .basket__button_hidden {
   opacity: 0;
+  pointer-events: none;
 }
