@@ -6,9 +6,9 @@ let basketSize = 0;
 const productList = document.querySelectorAll(".product");
 let currentDroppable = null;
 
-
 let inlineOffset = 0;
 let previousWidth = 0;
+let overallWidth = 0;
 
 function handleDnd(e) {
   const { currentTarget, pageX, pageY, clientX, clientY } = e;
@@ -30,34 +30,26 @@ function handleDnd(e) {
     node.style = "";
   }
 
-
   function moveCopy() {
-
     const width = targetCopy.getBoundingClientRect().width;
-    const height = targetCopy.getBoundingClientRect().height;
-
+    const containerWidth = basketContainer.getBoundingClientRect().width;
     const itemCount = basketContainer.querySelectorAll(".product").length;
 
+    overallWidth += width;
     if (itemCount > 1) {
       inlineOffset += previousWidth;
     }
-
-    if (inlineOffset >= (basketContainer.getBoundingClientRect().width - width)) {
+    if (overallWidth >= containerWidth + width / 2) {
       inlineOffset = 0;
+      overallWidth = width;
     }
-    console.log(basketContainer.getBoundingClientRect().width);
-
+    console.log(overallWidth);
 
     reset(targetCopy);
 
     targetCopy.style.insetInlineStart = `${inlineOffset}px`;
     targetCopy.style.insetBlockEnd = 0;
-    targetCopy.style.zIndex = -1;
     previousWidth = width;
-
-    /* targetCopy.style.insetInlineStart = `${0}px`;
-    targetCopy.style.insetBlockStart = 'unset';
-    targetCopy.style.insetBlockEnd = 0; */
   }
 
   moveAt(pageX, pageY);
@@ -88,6 +80,7 @@ function handleDnd(e) {
       targetCopy = currentTarget.cloneNode(true);
       currentTarget.classList.add("product_hidden");
       targetCopy.classList.remove(`product__${targetCopy.dataset.name}`);
+      targetCopy.classList.add("product_in-basket");
       basketContainer.append(targetCopy);
 
       moveCopy();
